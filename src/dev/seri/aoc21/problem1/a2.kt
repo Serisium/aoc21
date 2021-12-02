@@ -4,14 +4,14 @@ import java.io.File
 
 
 fun main() {
-    val file = File("input/1")
+    val file = File("res/1")
     val inputs = file.readLines().map { it.toInt() }
 
-    var lastWindowSum = 0
-    val answer = inputs.windowed(3).count { window ->
-        (window.sum() > lastWindowSum).also {
-            lastWindowSum = window.sum()
-        }
-    }
+    val answer = inputs
+            .windowed(3)
+            .map { it.sum() }
+            .windowed(2)
+            .count { it[1] > it[0] }
+
     println(answer)
 }
